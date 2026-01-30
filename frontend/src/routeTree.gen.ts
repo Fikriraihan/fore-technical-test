@@ -10,58 +10,44 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LayoutRouteImport } from './routes/_layout'
-import { Route as LayoutIndexRouteImport } from './routes/_layout/index'
-import { Route as LayoutInboxRouteImport } from './routes/_layout/inbox'
-import { Route as LayoutAboutRouteImport } from './routes/_layout/about'
+import { Route as LayouthomeIndexRouteImport } from './routes/_layout/(home)/index'
+import { Route as LayouthomeTitleRouteImport } from './routes/_layout/(home)/$title'
 
 const LayoutRoute = LayoutRouteImport.update({
   id: '/_layout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LayoutIndexRoute = LayoutIndexRouteImport.update({
-  id: '/',
+const LayouthomeIndexRoute = LayouthomeIndexRouteImport.update({
+  id: '/(home)/',
   path: '/',
   getParentRoute: () => LayoutRoute,
 } as any)
-const LayoutInboxRoute = LayoutInboxRouteImport.update({
-  id: '/inbox',
-  path: '/inbox',
-  getParentRoute: () => LayoutRoute,
-} as any)
-const LayoutAboutRoute = LayoutAboutRouteImport.update({
-  id: '/about',
-  path: '/about',
+const LayouthomeTitleRoute = LayouthomeTitleRouteImport.update({
+  id: '/(home)/$title',
+  path: '/$title',
   getParentRoute: () => LayoutRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof LayoutIndexRoute
-  '/about': typeof LayoutAboutRoute
-  '/inbox': typeof LayoutInboxRoute
+  '/': typeof LayouthomeIndexRoute
+  '/$title': typeof LayouthomeTitleRoute
 }
 export interface FileRoutesByTo {
-  '/about': typeof LayoutAboutRoute
-  '/inbox': typeof LayoutInboxRoute
-  '/': typeof LayoutIndexRoute
+  '/$title': typeof LayouthomeTitleRoute
+  '/': typeof LayouthomeIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_layout': typeof LayoutRouteWithChildren
-  '/_layout/about': typeof LayoutAboutRoute
-  '/_layout/inbox': typeof LayoutInboxRoute
-  '/_layout/': typeof LayoutIndexRoute
+  '/_layout/(home)/$title': typeof LayouthomeTitleRoute
+  '/_layout/(home)/': typeof LayouthomeIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/inbox'
+  fullPaths: '/' | '/$title'
   fileRoutesByTo: FileRoutesByTo
-  to: '/about' | '/inbox' | '/'
-  id:
-    | '__root__'
-    | '/_layout'
-    | '/_layout/about'
-    | '/_layout/inbox'
-    | '/_layout/'
+  to: '/$title' | '/'
+  id: '__root__' | '/_layout' | '/_layout/(home)/$title' | '/_layout/(home)/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,40 +63,31 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_layout/': {
-      id: '/_layout/'
+    '/_layout/(home)/': {
+      id: '/_layout/(home)/'
       path: '/'
       fullPath: '/'
-      preLoaderRoute: typeof LayoutIndexRouteImport
+      preLoaderRoute: typeof LayouthomeIndexRouteImport
       parentRoute: typeof LayoutRoute
     }
-    '/_layout/inbox': {
-      id: '/_layout/inbox'
-      path: '/inbox'
-      fullPath: '/inbox'
-      preLoaderRoute: typeof LayoutInboxRouteImport
-      parentRoute: typeof LayoutRoute
-    }
-    '/_layout/about': {
-      id: '/_layout/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof LayoutAboutRouteImport
+    '/_layout/(home)/$title': {
+      id: '/_layout/(home)/$title'
+      path: '/$title'
+      fullPath: '/$title'
+      preLoaderRoute: typeof LayouthomeTitleRouteImport
       parentRoute: typeof LayoutRoute
     }
   }
 }
 
 interface LayoutRouteChildren {
-  LayoutAboutRoute: typeof LayoutAboutRoute
-  LayoutInboxRoute: typeof LayoutInboxRoute
-  LayoutIndexRoute: typeof LayoutIndexRoute
+  LayouthomeTitleRoute: typeof LayouthomeTitleRoute
+  LayouthomeIndexRoute: typeof LayouthomeIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
-  LayoutAboutRoute: LayoutAboutRoute,
-  LayoutInboxRoute: LayoutInboxRoute,
-  LayoutIndexRoute: LayoutIndexRoute,
+  LayouthomeTitleRoute: LayouthomeTitleRoute,
+  LayouthomeIndexRoute: LayouthomeIndexRoute,
 }
 
 const LayoutRouteWithChildren =

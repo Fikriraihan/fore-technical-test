@@ -27,6 +27,12 @@ const router = createRouter({
 
 const queryClient = new QueryClient()
 
+declare module '@tanstack/react-router' {
+  interface Register {
+    router: typeof router
+  }
+}
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <SidebarProvider>

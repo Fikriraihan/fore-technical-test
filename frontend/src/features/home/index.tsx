@@ -1,6 +1,7 @@
 import { SidebarTrigger } from "@/components/ui/sidebar"
-import TopMenu from "./top-menu"
-import Hero from "./hero"
+import TopMenu from "./components/TopMenu"
+import MovieList from "./components/MovieList"
+import Hero from "./components/hero"
 
 const Home = () => {
   return (
@@ -9,7 +10,10 @@ const Home = () => {
         <SidebarTrigger />
         <TopMenu />
       </div>
-      <Hero />
+      <div className='space-y-10'>
+        <Hero />
+        <MovieList />
+      </div>
     </section>
   )
 }

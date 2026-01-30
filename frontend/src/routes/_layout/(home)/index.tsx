@@ -1,8 +1,8 @@
 // import { ComponentExample } from '@/components/component-example'
-import Home from '@/features/home/components'
+import Home from '@/features/home'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_layout/')({
+export const Route = createFileRoute('/_layout/(home)/')({
   component: Home,
 })
 
