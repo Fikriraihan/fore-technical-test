@@ -1,11 +1,15 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import { SidebarProvider, SidebarTrigger } from "./components/ui/sidebar";
-import { AppSidebar } from "./components/app-sidebar";
+import { SidebarProvider } from "./components/ui/sidebar";
 import { createRouter, RouterProvider } from '@tanstack/react-router'
 import qs from 'qs'
 import { routeTree } from './routeTree.gen.ts'
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+import { ThemeProvider } from './components/theme-provider.tsx';
 
 function customParser(searchString: string) {
   return qs.parse(searchString, { ignoreQueryPrefix: true })
@@ -21,14 +25,16 @@ const router = createRouter({
   stringifySearch: customStringifier,
 })
 
+const queryClient = new QueryClient()
+
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <SidebarProvider>
-      <AppSidebar />
-      <main>
-        <SidebarTrigger />
-        <RouterProvider router={router} />
-      </main>
+      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+        <QueryClientProvider client={queryClient}>
+          <RouterProvider router={router} />
+        </QueryClientProvider>
+      </ThemeProvider>
     </SidebarProvider>
   </StrictMode>,
 )

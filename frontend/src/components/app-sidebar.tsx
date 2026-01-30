@@ -2,6 +2,7 @@
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -9,29 +10,31 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
-import { RiCalendar2Line, RiHome2Line, RiInbox2Line, RiSearch2Line, RiSettings2Line } from "@remixicon/react"
+import { cn } from "@/lib/utils"
+import { RiBookMarkedLine, RiCompassDiscoverLine, RiHome2Line, RiSettings2Line, RiStackLine } from "@remixicon/react"
+import { Link, useLocation, useMatchRoute, useRouter } from "@tanstack/react-router"
+import { ThemeToggle } from "./theme-toggle"
 
-// Menu items.
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/",
     icon: RiHome2Line,
   },
   {
-    title: "Inbox",
-    url: "inbox",
-    icon: RiInbox2Line,
+    title: "Explore",
+    url: "/inbox",
+    icon: RiCompassDiscoverLine,
   },
   {
-    title: "Calendar",
+    title: "Genres",
     url: "#",
-    icon: RiCalendar2Line,
+    icon: RiStackLine,
   },
   {
-    title: "Search",
+    title: "Favourites",
     url: "#",
-    icon: RiSearch2Line,
+    icon: RiBookMarkedLine,
   },
   {
     title: "Settings",
@@ -41,8 +44,10 @@ const items = [
 ]
 
 export function AppSidebar() {
+  const { pathname } = useLocation()
+
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon" variant="floating">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
@@ -51,10 +56,12 @@ export function AppSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
+                    <Link to={item.url}>
+                      <item.icon color={pathname === item.url ? "var(--primary)" : "var(--sidebar-foreground)"} />
+                      <span className={cn("ml-2", {
+                        "text-primary": pathname === item.url
+                      })}>{item.title}</span>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
@@ -62,6 +69,9 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <ThemeToggle />
+      </SidebarFooter>
     </Sidebar>
   )
 }

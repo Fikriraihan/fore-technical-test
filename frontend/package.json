@@ -14,6 +14,7 @@
     "@fontsource-variable/raleway": "^5.2.8",
     "@remixicon/react": "^4.9.0",
     "@tailwindcss/vite": "^4.1.18",
+    "@tanstack/react-query": "^5.90.20",
     "@tanstack/react-router": "^1.157.16",
     "@tanstack/react-router-devtools": "^1.157.16",
     "axios": "^1.13.4",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@tanstack/eslint-plugin-query": "^5.91.3",
     "@tanstack/router-plugin": "^1.157.16",
     "@types/node": "^24.10.1",
     "@types/qs": "^6.14.0",
