@@ -11,8 +11,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { cn } from "@/lib/utils"
-import { RiBookMarkedLine, RiCompassDiscoverLine, RiHome2Line, RiSettings2Line, RiStackLine } from "@remixicon/react"
-import { Link, useLocation, useMatchRoute, useRouter } from "@tanstack/react-router"
+import { RiBookMarkedLine, RiCompassDiscoverLine, RiHome2Line, RiSettings2Line, RiStackLine, RiVideoOnFill } from "@remixicon/react"
+import { Link, useLocation } from "@tanstack/react-router"
 import { ThemeToggle } from "./theme-toggle"
 
 const items = [
@@ -50,8 +50,10 @@ export function AppSidebar() {
     <Sidebar collapsible="icon" variant="floating">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupContent>
+          <SidebarGroupLabel className="gap-4 flex mt-2">
+            <img src='/logo.svg' className="w-20" alt="Logo" />
+          </SidebarGroupLabel>
+          <SidebarGroupContent className="mt-4">
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>

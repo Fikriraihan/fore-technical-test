@@ -19,7 +19,7 @@ const SearchInput = (props: SearchInputProps) => {
           setSearch(e.target.value)
         }}
         placeholder="Search for films..."
-        className="pl-10 bg-white border-[#e4e4e7]"
+        className="pl-10"
       />
       <RiCloseLargeLine className={cn('absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 cursor-pointer', search === '' && 'hidden')} onClick={() => setSearch('')} />
     </div>

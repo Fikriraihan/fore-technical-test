@@ -2,7 +2,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar"
 import TopMenu from "./components/TopMenu"
 import MovieList from "./components/MovieList"
 import Hero from "./components/Hero"
-import { useQuery } from "@tanstack/react-query"
+import { keepPreviousData, useQuery } from "@tanstack/react-query"
 import { getPopularMovies, getSearchMovies } from "./api/movie.api"
 import type { MovieResponseType } from "./DAO/movie.dao"
 import { useNavigate, useSearch } from "@tanstack/react-router"
@@ -19,13 +19,15 @@ const Home = () => {
   const { data: popularMovieList } = useQuery<MovieResponseType>({
     queryKey: ['movies', page],
     queryFn: () => getPopularMovies(page),
-    enabled: !search
+    enabled: !search,
+    placeholderData: keepPreviousData
   })
 
   const { data: searchMovieList } = useQuery({
     queryKey: ['movies', search],
     queryFn: () => getSearchMovies(search, page),
-    enabled: !!search
+    enabled: !!search,
+    placeholderData: keepPreviousData
   })
 
   useEffect(() => {
