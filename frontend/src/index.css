@@ -128,14 +128,18 @@
     }
 
     h1 {
-      @apply text-4xl font-bold md:text-6xl
+      @apply text-4xl font-bold md:text-6xl;
     }
 
     h2 {
-      @apply text-2xl font-bold md:text-3xl
+      @apply text-2xl font-bold md:text-3xl;
     }
     
     p {
-      @apply text-sm md:text-lg line-clamp-3 md:line-clamp-2 max-w-xl
+      @apply text-sm md:text-lg;
     }
+
+    /* .text-preview {
+      @apply line-clamp-3 md:line-clamp-2 max-w-xl;
+    } */
 }

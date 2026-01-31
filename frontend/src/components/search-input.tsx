@@ -1,4 +1,4 @@
-import { RiSearchAi2Fill } from "@remixicon/react"
+import { RiCloseLargeLine, RiSearchAi2Fill } from "@remixicon/react"
 import { Input } from "./ui/input"
 import { cn } from "@/lib/utils"
 
@@ -21,6 +21,7 @@ const SearchInput = (props: SearchInputProps) => {
         placeholder="Search for films..."
         className="pl-10 bg-white border-[#e4e4e7]"
       />
+      <RiCloseLargeLine className={cn('absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 cursor-pointer', search === '' && 'hidden')} onClick={() => setSearch('')} />
     </div>
   )
 }

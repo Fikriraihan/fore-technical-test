@@ -11,7 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LayoutRouteImport } from './routes/_layout'
 import { Route as LayouthomeIndexRouteImport } from './routes/_layout/(home)/index'
-import { Route as LayouthomeTitleRouteImport } from './routes/_layout/(home)/$title'
+import { Route as LayouthomeIdRouteImport } from './routes/_layout/(home)/$id'
 
 const LayoutRoute = LayoutRouteImport.update({
   id: '/_layout',
@@ -22,32 +22,32 @@ const LayouthomeIndexRoute = LayouthomeIndexRouteImport.update({
   path: '/',
   getParentRoute: () => LayoutRoute,
 } as any)
-const LayouthomeTitleRoute = LayouthomeTitleRouteImport.update({
-  id: '/(home)/$title',
-  path: '/$title',
+const LayouthomeIdRoute = LayouthomeIdRouteImport.update({
+  id: '/(home)/$id',
+  path: '/$id',
   getParentRoute: () => LayoutRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof LayouthomeIndexRoute
-  '/$title': typeof LayouthomeTitleRoute
+  '/$id': typeof LayouthomeIdRoute
 }
 export interface FileRoutesByTo {
-  '/$title': typeof LayouthomeTitleRoute
+  '/$id': typeof LayouthomeIdRoute
   '/': typeof LayouthomeIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/_layout': typeof LayoutRouteWithChildren
-  '/_layout/(home)/$title': typeof LayouthomeTitleRoute
+  '/_layout/(home)/$id': typeof LayouthomeIdRoute
   '/_layout/(home)/': typeof LayouthomeIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$title'
+  fullPaths: '/' | '/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/$title' | '/'
-  id: '__root__' | '/_layout' | '/_layout/(home)/$title' | '/_layout/(home)/'
+  to: '/$id' | '/'
+  id: '__root__' | '/_layout' | '/_layout/(home)/$id' | '/_layout/(home)/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -70,23 +70,23 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayouthomeIndexRouteImport
       parentRoute: typeof LayoutRoute
     }
-    '/_layout/(home)/$title': {
-      id: '/_layout/(home)/$title'
-      path: '/$title'
-      fullPath: '/$title'
-      preLoaderRoute: typeof LayouthomeTitleRouteImport
+    '/_layout/(home)/$id': {
+      id: '/_layout/(home)/$id'
+      path: '/$id'
+      fullPath: '/$id'
+      preLoaderRoute: typeof LayouthomeIdRouteImport
       parentRoute: typeof LayoutRoute
     }
   }
 }
 
 interface LayoutRouteChildren {
-  LayouthomeTitleRoute: typeof LayouthomeTitleRoute
+  LayouthomeIdRoute: typeof LayouthomeIdRoute
   LayouthomeIndexRoute: typeof LayouthomeIndexRoute
 }
 
 const LayoutRouteChildren: LayoutRouteChildren = {
-  LayouthomeTitleRoute: LayouthomeTitleRoute,
+  LayouthomeIdRoute: LayouthomeIdRoute,
   LayouthomeIndexRoute: LayouthomeIndexRoute,
 }
 

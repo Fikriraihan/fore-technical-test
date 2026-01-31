@@ -1,35 +1,46 @@
 import { Card } from "@/components/ui/card"
-import { useParams } from "@tanstack/react-router"
-import AvengersImg from '@/assets/avengers.jpg'
+import { useParams, useRouter } from "@tanstack/react-router"
 import { Button } from "@/components/ui/button"
-import { RiHeart2Line, RiShare2Line } from "@remixicon/react"
+import { RiArrowLeftLine, RiHeart2Line, RiShare2Line } from "@remixicon/react"
 import { Badge } from "@/components/ui/badge"
+import { useQuery } from "@tanstack/react-query"
+import { getMovieDetails } from "../api/movie.api"
+import { type MovieDetailType } from "../DAO/movie.dao"
+import { IMAGE_URL } from "../constants/imageUrl"
 
 const MovieDetail = () => {
-  const { title } = useParams({ from: '/_layout/(home)/$title' })
+  const { id } = useParams({ from: '/_layout/(home)/$id' })
+  const router = useRouter()
+  const { data: movieDetail } = useQuery<MovieDetailType>({
+    queryKey: ['movie-detail', id],
+    queryFn: () => getMovieDetails(id)
+  })
+
   return (
-    <div className='p-6 md:p-12 flex items-center gap-10 h-full'>
-      {/* <h1 className='text-3xl font-bold mb-6'>{title}</h1> */}
-      <Card className="relative w-full max-w-xs p-0">
-        <img
-          src={AvengersImg}
-          alt={title}
-          className="aspect-2/3 w-full object-cover"
-        />
-      </Card>
-      <div className="flex flex-col gap-3">
-        <h2>{title}</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, dolores.</p>
-        <div className='flex gap-2'>
-          <Button className="w-fit px-12 py-4">Watch now</Button>
-          <Button variant='outline' className="w-fit px-12 py-4">Review</Button>
-          <Button variant='outline'><RiHeart2Line /></Button>
-          <Button variant='outline'><RiShare2Line /></Button>
-        </div>
-        <div className="flex gap-2">
-          <Badge className='px-4 py-2'>Action</Badge>
-          <Badge className='px-4 py-2'>Action</Badge>
-          <Badge className='px-4 py-2'>Action</Badge>
+    <div className="p-6 md:p-12 space-y-6">
+      <RiArrowLeftLine onClick={() => router.history.back()} className="cursor-pointer" />
+      <div className='flex items-center gap-10'>
+        <Card className="relative w-full max-w-xs p-0">
+          <img
+            src={`${IMAGE_URL}/${movieDetail?.poster_path}`}
+            alt={id}
+            className="aspect-2/3 w-full object-cover"
+          />
+        </Card>
+        <div className="flex flex-col gap-3">
+          <h2>{movieDetail?.title}</h2>
+          <p>{movieDetail?.overview}</p>
+          <div className='flex gap-2'>
+            <Button className="w-fit px-12 py-4">Watch now</Button>
+            <Button variant='outline' className="w-fit px-12 py-4">Review</Button>
+            <Button variant='outline' aria-label="Add to favorites"><RiHeart2Line /></Button>
+            <Button variant='outline' aria-label="Share"><RiShare2Line /></Button>
+          </div>
+          <div className="flex gap-2">
+            {movieDetail?.genres.map((genre) => (
+              <Badge key={genre.id} className='px-4 py-2'>{genre.name}</Badge>
+            ))}
+          </div>
         </div>
       </div>
     </div>

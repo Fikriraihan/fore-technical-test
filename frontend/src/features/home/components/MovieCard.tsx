@@ -1,37 +1,41 @@
-import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import {
   Card,
-  CardAction,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import AvengersImg from '@/assets/avengers.jpg'
+import { IMAGE_URL } from "../constants/imageUrl"
+import { Link } from "@tanstack/react-router"
+import type { MovieType } from "../DAO/movie.dao"
+
+interface MovieCardProps {
+  movie: MovieType
+}
 
 
-export function MovieCard() {
+export function MovieCard(props: MovieCardProps) {
+  const { movie } = props
+  const { overview, title, poster_path } = movie
   return (
-    <Card className="relative mx-auto w-full max-w-sm pt-0">
+    <Card className="relative mx-auto w-full pt-0">
       <div className="absolute inset-0 z-30 aspect-video bg-black/35" />
       <img
-        src={AvengersImg}
-        alt="Event cover"
+        src={`${IMAGE_URL}/${poster_path}`}
+        alt={title}
         className="relative z-20 aspect-video w-full object-cover dark:brightness-40"
       />
       <CardHeader>
-        <CardAction>
-          <Badge variant="secondary">Featured</Badge>
-        </CardAction>
-        <CardTitle>Design systems meetup</CardTitle>
-        <CardDescription>
-          A practical talk on component APIs, accessibility, and shipping
-          faster.
+        <CardTitle>{title}</CardTitle>
+        <CardDescription className='line-clamp-3'>
+          {overview}
         </CardDescription>
       </CardHeader>
       <CardFooter>
-        <Button className="w-full">View Event</Button>
+        <Link to={`/$id`} params={{ id: movie.id.toString() }}>
+          <Button className="w-full">View Movie</Button>
+        </Link>
       </CardFooter>
     </Card>
   )

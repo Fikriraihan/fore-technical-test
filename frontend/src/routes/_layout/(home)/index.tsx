@@ -2,12 +2,22 @@
 import Home from '@/features/home'
 import { createFileRoute } from '@tanstack/react-router'
 
-export const Route = createFileRoute('/_layout/(home)/')({
-  component: Home,
+type AccessSettingSearchParams = {
+  page?: number
+  per_page?: number
+  search?: string
+}
+
+const validateSearch = (
+  search: Record<string, unknown>
+): AccessSettingSearchParams => ({
+  page: search.page as number,
+  per_page: search.per_page as number,
+  search: search.search as string,
 })
 
-// function RouteComponent() {
-//   return (
-//     <ComponentExample />
-//   )
-// }
+export const Route = createFileRoute('/_layout/(home)/')({
+  component: Home,
+  validateSearch,
+})
+
