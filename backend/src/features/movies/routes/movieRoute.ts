@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get("/", validateMovies, getPopularMovies);
 router.get("/search", validateMovies, validateSearchMovies, getSearchMovies);
-router.post("/:id",validateMovieDetail, getMovieDetail);
+router.get("/:id",validateMovieDetail, getMovieDetail);
 
 export default router;
