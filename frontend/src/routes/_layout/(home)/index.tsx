@@ -1,4 +1,3 @@
-// import { ComponentExample } from '@/components/component-example'
 import Home from '@/features/home'
 import { createFileRoute } from '@tanstack/react-router'
 

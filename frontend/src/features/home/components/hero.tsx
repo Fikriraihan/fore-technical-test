@@ -15,14 +15,16 @@ const Hero = (props: HeroProps) => {
   const { overview, title, poster_path, id } = movie
 
   return (
-    <Card className="relative w-full h-96 md:h-full p-0">
-      <div className="absolute inset-0 z-10 bg-black/40" />
-      <img
-        src={`${IMAGE_URL}/${poster_path}`}
-        alt="Event cover"
-        className="w-full h-full aspect-4/3 sm:aspect-video md:aspect-21/9 object-cover brightness-90 transition-transform duration-700 hover:scale-105"
-      />
-      <div className='absolute inset-0 z-20 flex flex-col justify-end md:justify-center p-6 md:p-12 gap-6 md:gap-10 md:pb-12 text-left'>
+    <Card className="relative w-full p-0 overflow-hidden group min-h-[500px] md:min-h-[600px] h-fit">
+      <div className="absolute inset-0 z-0">
+        <img
+          src={`${IMAGE_URL}/${poster_path}`}
+          alt={`${title} poster`}
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40" />
+      </div>
+      <div className='relative z-20 flex flex-col justify-end md:justify-center h-full p-6 md:p-12 gap-6 md:gap-10 text-left'>
         <div>
           <Badge variant='primary' className='h-8'>
             <RiFireFill size={16} color="var(--primary)" className="mr-1" />
@@ -39,7 +41,7 @@ const Hero = (props: HeroProps) => {
             {overview}
           </p>
         </div>
-        <Link to={`/$id`} params={{ id }}>
+        <Link to={`/$id`} params={{ id: String(id) }}>
           <Button className='md:px-8 md:py-6 w-fit font-semibold shadow-lg shadow-primary/25'>Watch Now</Button>
         </Link>
       </div>

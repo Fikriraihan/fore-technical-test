@@ -1,4 +1,4 @@
-import { queryOptions, useQuery } from "@tanstack/react-query"
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query"
 import { getPopularMovies } from "../api/movie.api"
 import type { QueryConfig } from "@/lib/query-client"
 
@@ -17,7 +17,7 @@ type useGetPopularMovieParams = {
 }
 
 export const useGetPopularMovieQuery = (params: useGetPopularMovieParams) => {
-  return useQuery({
+  return useSuspenseQuery({
     ...getPopularMovieQueryOptions(params.page),
     ...params.queryConfig
   })

@@ -31,7 +31,7 @@ export const callApi = (
     Object.keys(urlParams).forEach((param) => {
       const placeholder = `:${param}`;
       if (url.includes(placeholder)) {
-        url = url.replace(placeholder, urlParams[param]);
+        url = url.replace(placeholder, String(urlParams[param]));
       }
     });
   }

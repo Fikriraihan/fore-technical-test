@@ -128,7 +128,7 @@
     }
 
     h1 {
-      @apply text-2xl md:text-4xl font-bold lg:text-6xl;
+      @apply text-2xl sm:text-4xl font-bold lg:text-6xl;
     }
 
     h2 {
@@ -140,10 +140,6 @@
     }
     
     p {
-      @apply text-xs md:text-lg lg:text-lg;
+      @apply text-sm sm:text-lg lg:text-lg;
     }
-
-    /* .text-preview {
-      @apply line-clamp-3 md:line-clamp-2 max-w-xl;
-    } */
 }

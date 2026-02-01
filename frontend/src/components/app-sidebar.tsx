@@ -11,7 +11,7 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { cn } from "@/lib/utils"
-import { RiBookMarkedLine, RiCompassDiscoverLine, RiHome2Line, RiSettings2Line, RiStackLine, RiVideoOnFill } from "@remixicon/react"
+import { RiHome2Line } from "@remixicon/react"
 import { Link, useLocation } from "@tanstack/react-router"
 import { ThemeToggle } from "./theme-toggle"
 
@@ -20,26 +20,6 @@ const items = [
     title: "Home",
     url: "/",
     icon: RiHome2Line,
-  },
-  {
-    title: "Explore",
-    url: "/inbox",
-    icon: RiCompassDiscoverLine,
-  },
-  {
-    title: "Genres",
-    url: "#",
-    icon: RiStackLine,
-  },
-  {
-    title: "Favourites",
-    url: "#",
-    icon: RiBookMarkedLine,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: RiSettings2Line,
   },
 ]
 

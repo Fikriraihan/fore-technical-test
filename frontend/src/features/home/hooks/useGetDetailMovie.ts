@@ -1,4 +1,4 @@
-import { queryOptions, useQuery } from "@tanstack/react-query"
+import { queryOptions, useSuspenseQuery } from "@tanstack/react-query"
 import { getMovieDetails } from "../api/movie.api"
 import type { QueryConfig } from "@/lib/query-client"
 
@@ -17,7 +17,7 @@ type useGetDetailMovieParams = {
 }
 
 export const useGetDetailMovieQuery = (params: useGetDetailMovieParams) => {
-  return useQuery({
+  return useSuspenseQuery({
     ...getDetailMovieQueryOptions(params.id),
     ...params.queryConfig
   })
