@@ -3,17 +3,14 @@ import { useParams, useRouter } from "@tanstack/react-router"
 import { Button } from "@/components/ui/button"
 import { RiArrowLeftLine, RiHeart2Line, RiShare2Line } from "@remixicon/react"
 import { Badge } from "@/components/ui/badge"
-import { useQuery } from "@tanstack/react-query"
-import { getMovieDetails } from "../api/movie.api"
-import { type MovieDetailType } from "../DAO/movie.dao"
 import { IMAGE_URL } from "../constants/imageUrl"
+import { useGetDetailMovieQuery } from "../hooks/useGetDetailMovie"
 
 const MovieDetail = () => {
   const { id } = useParams({ from: '/_layout/(home)/$id' })
   const router = useRouter()
-  const { data: movieDetail } = useQuery<MovieDetailType>({
-    queryKey: ['movie-detail', id],
-    queryFn: () => getMovieDetails(id)
+  const { data: movieDetail } = useGetDetailMovieQuery({
+    id: Number(id)
   })
 
   return (

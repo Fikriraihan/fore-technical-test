@@ -17,7 +17,7 @@ export const getSearchMovies = async (query?: string, page: number = 1): Promise
   return response.data
 }
 
-export const getMovieDetails = async (id: string): Promise<MovieDetailType> => {
+export const getMovieDetails = async (id: number): Promise<MovieDetailType> => {
   const response = await callApi(movieEndpoint.detail, 'GET', null, { id })
   return response.data
 }

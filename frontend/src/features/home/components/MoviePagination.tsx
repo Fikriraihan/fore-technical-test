@@ -18,9 +18,10 @@ export function MoviePagination({ totalPages }: MoviePaginationProps) {
   const navigate = useNavigate({ from: "/" });
   const search = useSearch({ from: '/_layout/(home)/' });
 
-  const [currentPage, setCurrentPage] = useState(() => {
+  const [currentPage, setCurrentPage] = useState<number>(() => {
     const pageParam = search.page;
-    return Number(pageParam) >= 1 && Number(pageParam) <= totalPages ? pageParam : 1;
+    const pageNum = Number(pageParam);
+    return pageNum >= 1 && pageNum <= totalPages ? pageNum : 1;
   });
 
   const handlePageChange = (page: number) => {
@@ -49,10 +50,11 @@ export function MoviePagination({ totalPages }: MoviePaginationProps) {
 
     if (!showEllipsis) {
       for (let i = 1; i <= totalPages; i++) {
+        const isMobileHidden = Math.abs(currentPage - i) > 1;
         items.push(
           <PaginationItem
             key={i}
-            className="transition-all duration-200 ease-in-out"
+            className={`transition-all duration-200 ease-in-out ${isMobileHidden ? 'hidden sm:block' : ''}`}
           >
             <PaginationLink
               onClick={() => handlePageChange(i)}
@@ -71,10 +73,11 @@ export function MoviePagination({ totalPages }: MoviePaginationProps) {
         );
       }
     } else {
+      const isFirstMobileHidden = Math.abs(currentPage - 1) > 1;
       items.push(
         <PaginationItem
           key={1}
-          className="transition-all duration-200 ease-in-out"
+          className={`transition-all duration-200 ease-in-out ${isFirstMobileHidden ? 'hidden sm:block' : ''}`}
         >
           <PaginationLink
             onClick={() => handlePageChange(1)}
@@ -94,7 +97,7 @@ export function MoviePagination({ totalPages }: MoviePaginationProps) {
 
       if (Number(currentPage) > 4) {
         items.push(
-          <PaginationItem key="ellipsis-start" className="animate-fade-in">
+          <PaginationItem key="ellipsis-start" className="animate-fade-in hidden sm:block">
             <PaginationEllipsis className="transition-all duration-200 ease-in-out hover:scale-110" />
           </PaginationItem>
         );
@@ -111,10 +114,11 @@ export function MoviePagination({ totalPages }: MoviePaginationProps) {
 
       for (let i = startPage; i <= endPage; i++) {
         if (i !== 1 && i !== totalPages) {
+          const isMobileHidden = Math.abs(currentPage - i) > 1;
           items.push(
             <PaginationItem
               key={i}
-              className="transition-all duration-200 ease-in-out animate-slide-in"
+              className={`transition-all duration-200 ease-in-out animate-slide-in ${isMobileHidden ? 'hidden sm:block' : ''}`}
             >
               <PaginationLink
                 onClick={() => handlePageChange(i)}
@@ -136,17 +140,18 @@ export function MoviePagination({ totalPages }: MoviePaginationProps) {
 
       if (Number(currentPage) < totalPages - 4) {
         items.push(
-          <PaginationItem key="ellipsis-end" className="animate-fade-in">
+          <PaginationItem key="ellipsis-end" className="animate-fade-in hidden sm:block">
             <PaginationEllipsis className="transition-all duration-200 ease-in-out hover:scale-110" />
           </PaginationItem>
         );
       }
 
       if (totalPages > 1) {
+        const isLastMobileHidden = Math.abs(currentPage - totalPages) > 1;
         items.push(
           <PaginationItem
             key={totalPages}
-            className="transition-all duration-200 ease-in-out"
+            className={`transition-all duration-200 ease-in-out ${isLastMobileHidden ? 'hidden sm:block' : ''}`}
           >
             <PaginationLink
               onClick={() => handlePageChange(totalPages)}
