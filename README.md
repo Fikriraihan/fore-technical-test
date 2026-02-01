@@ -29,7 +29,7 @@ The application requires the following environment variables to be set in `.env`
 ### Frontend (`frontend/.env`)
 | Variable | Description | Example |
 |----------|-------------|---------|
-| `VITE_SERVER_URL` | The URL where the backend is running. | `http://localhost:5000` |
+| `VITE_SERVER_URL` | The URL where the backend is running. | `http://localhost:5000/api` |
 
 ## How to Run
 
