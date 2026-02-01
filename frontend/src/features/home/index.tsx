@@ -17,9 +17,11 @@ const PopularMovies = ({ page }: { page: number }) => {
 
   return (
     <>
-      <div className="animate-fade-in">
-        <Hero movie={popularMovieList.results[0]} />
-      </div>
+      {popularMovieList.results[0] && (
+        <div className="animate-fade-in">
+          <Hero movie={popularMovieList.results[0]} />
+        </div>
+      )}
       <MovieList data={popularMovieList.results} />
       <MoviePagination totalPages={popularMovieList.total_pages} />
     </>

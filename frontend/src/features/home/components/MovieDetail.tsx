@@ -15,13 +15,15 @@ const MovieDetail = () => {
 
   return (
     <div className="max-w-6xl md:max-w-7xl">
-      <RiArrowLeftLine onClick={() => router.history.back()} className="cursor-pointer" />
+      <Button variant="ghost" size="icon" onClick={() => router.history.back()} aria-label="Go back">
+        <RiArrowLeftLine />
+      </Button>
       <div className='container mx-auto px-4 mt-10 relative pb-20'>
         <div className='flex items-center flex-col lg:flex-row gap-8'>
           <Card className="relative w-full max-w-xs p-0">
             <img
               src={`${IMAGE_URL}/${movieDetail.poster_path}`}
-              alt={id}
+              alt={movieDetail?.title ?? "Movie poster"}
               className="aspect-2/3 w-full object-cover"
             />
           </Card>
