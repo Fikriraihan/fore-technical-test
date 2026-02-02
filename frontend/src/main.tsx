@@ -6,10 +6,10 @@ import { createRouter, RouterProvider } from '@tanstack/react-router'
 import qs from 'qs'
 import { routeTree } from './routeTree.gen.ts'
 import {
-  QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query'
 import { ThemeProvider } from './components/theme-provider.tsx';
+import { queryClient } from './lib/query-client.ts';
 
 function customParser(searchString: string) {
   return qs.parse(searchString, { ignoreQueryPrefix: true })
@@ -24,8 +24,6 @@ const router = createRouter({
   parseSearch: customParser,
   stringifySearch: customStringifier,
 })
-
-const queryClient = new QueryClient()
 
 declare module '@tanstack/react-router' {
   interface Register {
